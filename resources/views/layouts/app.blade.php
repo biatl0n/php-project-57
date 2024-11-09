@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="csrf-param" content="_token">
 
-        <title>{{ config('app.name', 'Менеджер задач') }}</title>
+        <title>{{ __('Task Manager') }}</title>
 
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
