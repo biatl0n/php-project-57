@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="csrf-param" content="_token">
 
-        <title>{{ __('Task Manager') }}</title>
+        <title>{{ __('translations.heading') }}</title>
 
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -16,13 +16,13 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body>
-            <!-- Page Heading -->
+    <body cz-shortcut-listen="true">
+        <div id="app">
             <header class="fixed w-full">
               <x-navigation />
             </header>
 
-            <!-- Page Content -->
             {{ $slot }}
+        </div>
     </body>
 </html>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\TaskStatusController;
 
 Route::get('/', function () {
     return view('index');
@@ -10,6 +11,13 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::resource('task_statuses', TaskStatusController::class)
+    ->except('index', 'show')
+    ->middleware(['auth', 'verified']);
+
+Route::resource('task_statuses', TaskStatusController::class)
+    ->only('index', 'show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
