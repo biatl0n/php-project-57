@@ -15,6 +15,7 @@ return [
     'actions' => 'Действия',
     'create' => 'Создать',
     'update' => 'Обновить',
+    'change' => 'Изменить',
     'description' => 'Описание',
     'executor' => 'Исполнитель',
     'hello-from-hexlet' => 'Привет от Хекслета!',

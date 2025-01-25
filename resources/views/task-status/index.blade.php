@@ -35,8 +35,5 @@
                 </tbody>
             </table>
         </div>
-        <div class="grid col-span-full mt-4">
-            {{ $taskStatuses->links() }}
-        </div>
     </x-section>
 </x-app-layout>

@@ -21,6 +21,7 @@
                             <th>Автор</th>
                             <th>Исполнитель</th>
                             <th>Дата создания</th>
+                            @auth()<th>Действия</th>@endauth
                         </tr>
                     <tbody>
                     @foreach($tasks as $task)
@@ -31,14 +32,19 @@
                             <td> {{ $task->createdBy->name }} </td>
                             <td> {{ $task->assignedTo->name ?? '' }} </td>
                             <td> {{ $task->created_at }} </td>
+                            @auth()
+                                <td>
+                                    @if($task->createdBy->id === Auth::id())
+                                        <a class="text-red-600 hover:text-ted-900" href="{{ route('tasks.destroy', $task->id) }}" data-confirm="Вы уверены?" data-method="delete" rel="nofollow">Удалить</a>
+                                    @endif
+                                    <a href="{{ route('tasks.edit', $task->id) }}" class="text-blue-600 hover:text-blue-900">{{ __('translations.change') }}</a>
+                                </td>
+                            @endauth
                         </tr>
                     @endforeach
                     </tbody>
                     </thead>
                 </table>
-            </div>
-            <div class="grid col-span-full mt-4">
-                {{ $tasks->links() }}
             </div>
     </x-section>
 </x-app-layout>
