@@ -39,7 +39,7 @@ class TaskStatusTest extends TestCase
     public function testCreateWithoutAuth()
     {
         $response = $this->get(route('task_statuses.create'));
-        $response->assertRedirect('login');
+        $response->assertStatus(403);
     }
 
     public function testEditWithAuth()
@@ -54,7 +54,7 @@ class TaskStatusTest extends TestCase
     {
         $taskStatus =  TaskStatus::factory()->create();
         $response = $this->get(route('task_statuses.edit', [$taskStatus]));
-        $response->assertRedirect('login');
+        $response->assertStatus(403);
     }
 
     public function testStoreWithAuth()
@@ -72,7 +72,7 @@ class TaskStatusTest extends TestCase
     {
         $data =  TaskStatus::factory()->make()->only('name');
         $response = $this->post(route('task_statuses.store'), $data);
-        $response->assertRedirect(route('login'));
+        $response->assertStatus(403);
     }
 
     public function testUpdateWithAuth()
@@ -93,7 +93,7 @@ class TaskStatusTest extends TestCase
         $data = TaskStatus::factory()->make()->only('name');
 
         $response = $this->patch(route('task_statuses.update', [$taskStatus]), $data);
-        $response->assertRedirect(route('login'));
+        $response->assertStatus(403);
     }
 
     public function testDestroyWithAuth()
@@ -108,13 +108,13 @@ class TaskStatusTest extends TestCase
         $this->assertDatabaseMissing('task_statuses', $taskStatus->only('id'));
     }
 
-    public  function testDestroyWithoutAuth()
+    public function testDestroyWithoutAuth()
     {
         $taskStatus = TaskStatus::factory()->create();
 
         $response = $this->delete(route('task_statuses.destroy', [$taskStatus]));
         $response->assertSessionHasNoErrors();
-        $response->assertRedirect(route('login'));
+        $response->assertStatus(403);
 
         $this->assertDatabaseHas('task_statuses', $taskStatus->only('name'));
     }

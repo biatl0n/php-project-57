@@ -1,25 +1,20 @@
 <x-app-layout>
-
-    <section class="bg-white dark:bg-gray-900">
-        <div class="grid max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 lg:pt-28">
+    <x-section>
             <div class="grid col-span-full">
-                <h1 class="mb-5 dark:text-white text-5xl">{{ __('translations.task-status.create.text') }}</h1>
-                <x-error />
+                <h1 class="mb-5 dark:text-white text-5xl">{{ __('task-status.create-status') }}</h1>
                 {{ html()->modelForm($taskStatus->name, 'POST', route('task_statuses.store'))->class('w-50')->open() }}
-                    {{ html()->div()->class('flex flex-col')->open() }}
-                        {{ html()->div()->open() }}
-                            {{ html()->label(__('translations.task-status.table-column2'))->for('name')->class('dark:text-white') }}
-                        {{ html()->div()->close() }}
-                        {{ html()->div()->class('mt-2')->open() }}
-                            {{ html()->input()->class('rounded border-gray-300 w-1/3')->name('name')->id('name')->type('text') }}
-                        {{ html()->div()->close() }}
-                        {{ html()->div()->class('mt-2')->open() }}
-                            {{ html()->button(__('translations.task-status.create.button'))->type('submit')->class('bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded') }}
-                        {{ html()->div()->close() }}
-                    {{ html()->div()->close() }}
-                {{ html()->closeModelForm() }}
+                    <x-div class="flex flex-col">
+                        <x-div>
+                            <x-input-label for="name" :value="__('translations.name')" />
+                        </x-div>
+                        <x-div class="mt-2">
+                            <x-text-input id="name" name="name" :value="old('name', $taskStatus->name)" autofocus />
+                            <x-input-error :messages="$errors->get('name')"/>
+                        </x-div>
+                        <x-div class="mt-2">
+                            <x-primary-button>{{ __('task-status.create-status') }}</x-primary-button>
+                        </x-div>
+                    </x-div>
             </div>
-        </div>
-    </section>
-
+    </x-section>
 </x-app-layout>

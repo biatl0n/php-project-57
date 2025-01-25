@@ -7,14 +7,14 @@
 
         <!-- Email Address -->
         <div>
-            <x-input-label for="email" :value="__('translations.login.email')" />
+            <x-input-label for="email" :value="__('translations.email')" />
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <!-- Password -->
         <div class="mt-4">
-            <x-input-label for="password" :value="__('translations.login.password')" />
+            <x-input-label for="password" :value="__('translations.password')" />
 
             <x-text-input id="password" class="block mt-1 w-full"
                             type="password"
@@ -28,19 +28,19 @@
         <div class="block mt-4">
             <label for="remember_me" class="inline-flex items-center">
                 <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('translations.login.remember') }}</span>
+                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('translations.remember-me') }}</span>
             </label>
         </div>
 
         <div class="flex items-center justify-end mt-4">
             @if (Route::has('password.request'))
                 <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                    {{ __('translations.login.forgot') }}
+                    {{ __('translations.forgot-your-password') }}
                 </a>
             @endif
 
             <x-primary-button class="ms-3">
-                {{ __('translations.login.login') }}
+                {{ __('translations.login2') }}
             </x-primary-button>
         </div>
     </form>

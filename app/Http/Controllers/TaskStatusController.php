@@ -12,7 +12,7 @@ class TaskStatusController extends Controller
      */
     public function index()
     {
-        $taskStatuses = TaskStatus::all();
+        $taskStatuses = TaskStatus::paginate(15);
         return view('task-status.index', compact('taskStatuses'));
     }
 
@@ -31,12 +31,12 @@ class TaskStatusController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required',
-        ]);
+            'name' => 'required|unique:task_statuses',
+        ], ['name.unique' => __('task-status.already-exists')]);
         $taskStatus = new TaskStatus();
         $taskStatus->fill($data);
         $taskStatus->save();
-        flash('Статус успешно создан')->success();
+        flash(__('task-status.created-successfully'))->success();
         return redirect()->route('task_statuses.index');
     }
 
@@ -45,7 +45,7 @@ class TaskStatusController extends Controller
      */
     public function show(string $id)
     {
-        //
+        abort(403, 'This action is unauthorized.');
     }
 
     /**
@@ -64,11 +64,11 @@ class TaskStatusController extends Controller
     {
         $taskStatus = TaskStatus::findOrFail($id);
         $data = $request->validate([
-            'name' => 'required'
-        ]);
+            'name' => 'required|unique:task_statuses,name,' . $taskStatus->id,
+            ], ['name.unique' => __('task-status.already-exists')]);
         $taskStatus->fill($data);
         $taskStatus->save();
-        flash('Статус успешно изменён')->success();
+        flash(__('task-status.changed-successfully'))->success();
         return redirect()->route('task_statuses.index');
     }
 
@@ -78,8 +78,12 @@ class TaskStatusController extends Controller
     public function destroy(string $id)
     {
         $taskStatus = TaskStatus::findOrFail($id);
-        $taskStatus->delete();
-        flash(' Статус успешно удалён ')->success();
+        if ($taskStatus->tasks()->count() == 0) {
+            $taskStatus->delete();
+            flash(__('task-status.deleted-successfully'))->success();
+        } else {
+            flash(__('task-status.deleted-fail-is-used'))->error();
+        }
         return redirect()->route('task_statuses.index');
     }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\TaskStatusController;
+use \App\Http\Controllers\TaskController;
 
 Route::get('/', function () {
     return view('index');
@@ -14,9 +15,16 @@ Route::get('/dashboard', function () {
 
 Route::resource('task_statuses', TaskStatusController::class)
     ->except('index', 'show')
-    ->middleware(['auth', 'verified']);
+    ->middleware(['AuthCheck', 'verified']);
 
 Route::resource('task_statuses', TaskStatusController::class)
+    ->only('index', 'show');
+
+Route::resource('tasks', TaskController::class)
+    ->except('index', 'show')
+    ->middleware(['AuthCheck', 'verified']);
+
+Route::resource('tasks', TaskController::class)
     ->only('index', 'show');
 
 Route::middleware('auth')->group(function () {
