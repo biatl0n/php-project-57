@@ -16,7 +16,8 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body cz-shortcut-listen="true">
+    <body>
+        <div name="new" class="hidden">new</div>
         <div id="app">
             <header class="fixed w-full">
               <x-navigation />
