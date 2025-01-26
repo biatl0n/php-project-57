@@ -20,6 +20,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr class="border-b text-left dark:text-white">
+                        <td>00</td>
+                        <td>Test</td>
+                        <td>2000</td>
+                        @auth()<td>No Actions</td>@endauth
+                    </tr>
                     @foreach($taskStatuses as $taskStatus)
                         <tr class="border-b text-left dark:text-white">
                             <td>{{ $taskStatus->id }}</td>
@@ -28,7 +34,8 @@
                             @auth()
                                 <td>
                                     <a class="text-red-600 hover:text-ted-900" href="{{ route('task_statuses.destroy', $taskStatus->id) }}" data-confirm="Вы уверены?" data-method="delete" rel="nofollow">Удалить</a>
-                                    <a class="text-blue-600 hover:text-blue-900" href="{{ route('task_statuses.edit', $taskStatus->id) }}">Изменить</a></td>
+                                    <a class="text-blue-600 hover:text-blue-900" href="{{ route('task_statuses.edit', $taskStatus->id) }}">Изменить</a>
+                                </td>
                             @endauth
                         </tr>
                     @endforeach
