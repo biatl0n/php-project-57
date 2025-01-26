@@ -9,7 +9,7 @@ class TaskStatusController extends Controller
 {
     public function __construct()
     {
-        $statuses = ['new', 'finished', 'На тестировании', 'В архиве'];
+        $statuses = ['new', 'finished', 'processing', 'archived'];
         foreach ($statuses as $status) {
             if (!TaskStatus::whereName($status)->exists()) {
                 TaskStatus::factory()->create(['name' => $status]);
