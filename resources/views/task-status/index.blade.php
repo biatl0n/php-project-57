@@ -2,9 +2,6 @@
     <x-section>
         <div class="grid col-span-full">
             <h1 class="mb-5 dark:text-white text-5xl">{{ __('translations.statuses') }}</h1>
-            @foreach($taskStatuses as $status)
-                {{ dump($status) }}
-            @endforeach
             @include('flash::message')
             @auth
                 <div>

@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 
 class TaskStatusController extends Controller
 {
+    public function __construct()
+    {
+        $statuses = ['Новая', 'Завершена', 'На тестировании', 'В архиве'];
+        foreach ($statuses as $status) {
+            if (!TaskStatus::whereName($status)->exists()) {
+                TaskStatus::factory()->create(['name' => $status]);
+            }
+        }
+    }
+
     /**
      * Display a listing of the resource.
      */
