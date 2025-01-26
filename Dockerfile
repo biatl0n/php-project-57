@@ -19,6 +19,5 @@ COPY . .
 RUN composer install
 RUN npm ci
 RUN npm run build
-RUN make install
 
 CMD ["bash", "-c", "touch database/database.sqlite && php artisan migrate:refresh --force --seed php artisan serve --host=0.0.0.0 --port=$PORT"]
