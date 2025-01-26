@@ -17,7 +17,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body>
-        <div name="new" class="hidden">new</div>
+        new
         <div id="app">
             <header class="fixed w-full">
               <x-navigation />
