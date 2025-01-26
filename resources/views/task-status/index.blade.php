@@ -20,12 +20,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="border-b text-left dark:text-white">
-                        <td>00</td>
-                        <td>Test</td>
-                        <td>2000</td>
-                        @auth()<td>No Actions</td>@endauth
-                    </tr>
                     @foreach($taskStatuses as $taskStatus)
                         <tr class="border-b text-left dark:text-white">
                             <td>{{ $taskStatus->id }}</td>
