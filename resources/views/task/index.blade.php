@@ -46,6 +46,9 @@
                     </tbody>
                     </thead>
                 </table>
+                <div class="mt-4">
+                    {{ $tasks->links() }}
+                </div>
             </div>
     </x-section>
 </x-app-layout>
