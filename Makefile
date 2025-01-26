@@ -9,6 +9,9 @@ test:
 
 install:
 	composer install
+
+setup:
+	make install
 	cp -n .env.example .env
 	php artisan key:gen --ansi
 	touch database/database.sqlite
