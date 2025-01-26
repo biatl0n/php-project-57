@@ -32,3 +32,9 @@ lint:
 
 console:
 	php artisan tinker
+
+migrate:
+	php artisan migrate
+
+migrate-fresh-seed:
+	php artisan migrate:fresh --seed

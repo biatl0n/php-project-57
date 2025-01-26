@@ -9,7 +9,7 @@
                 </div>
             @endauth
             <table class="mt-4">
-                <thead class="border-b-2 border-solid border-black text-left dark:text-white">
+                <thead class="border-b-2 border-solid border-black text-left dark:border-white dark:text-white">
                     <tr>
                         <th>ID</th>
                         <th>{{ __('translations.name') }}</th>
@@ -21,7 +21,7 @@
                 </thead>
                 <tbody>
                     @foreach($taskStatuses as $taskStatus)
-                        <tr class="border-b border-dashed text-left dark:text-white">
+                        <tr class="border-b text-left dark:text-white">
                             <td>{{ $taskStatus->id }}</td>
                             <td>{{ $taskStatus->name }}</td>
                             <td>{{ $taskStatus->created_at }}</td>
