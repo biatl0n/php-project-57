@@ -2,6 +2,7 @@
     <x-section>
             <div class="grid col-span-full">
                 <h1 class="mb-5 dark:text-white text-5xl">{{ __('translations.tasks') }}</h1>
+                @include('flash::message')
                 <x-div class="w-full flex items-center">
                     <x-div>
                         ---
@@ -34,9 +35,9 @@
                             <td> {{ $task->created_at }} </td>
                             @auth()
                                 <td>
-                                    @if($task->createdBy->id === Auth::id())
+                                    @can('delete', $task)
                                         <a class="text-red-600 hover:text-ted-900" href="{{ route('tasks.destroy', $task->id) }}" data-confirm="Вы уверены?" data-method="delete" rel="nofollow">Удалить</a>
-                                    @endif
+                                    @endcan
                                     <a href="{{ route('tasks.edit', $task->id) }}" class="text-blue-600 hover:text-blue-900">{{ __('translations.change') }}</a>
                                 </td>
                             @endauth
