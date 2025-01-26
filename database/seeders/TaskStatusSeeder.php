@@ -14,7 +14,7 @@ class TaskStatusSeeder extends Seeder
      */
     public function run(): void
     {
-        $statuses = ['новая', 'завершена', 'выполняется', 'в архиве'];
+        $statuses = ['new', 'finished', 'processing', 'in archive'];
         foreach ($statuses as $status) {
             TaskStatus::factory()->create(['name' => $status]);
         }
