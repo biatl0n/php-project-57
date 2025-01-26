@@ -19,5 +19,9 @@ COPY . .
 RUN composer install
 RUN npm ci
 RUN npm run build
+RUN cp -n .env.example .env
+RUN php artisan key:gen --ansi
+RUN touch database/database.sqlite
+RUN php artisan migrate:refresh --force --seed
 
-CMD ["bash", "-c", "touch database/database.sqlite && php artisan migrate:refresh --force --seed && php artisan serve --host=0.0.0.0 --port=$PORT"]
+CMD ["bash", "-c", "php artisan serve --host=0.0.0.0 --port=$PORT"]
