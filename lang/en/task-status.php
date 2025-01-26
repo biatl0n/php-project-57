@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'create' => 'new',
     'create-status' => 'new',
     'change-status' => 'change',
     'created-successfully' => 'Статус успешно создан',

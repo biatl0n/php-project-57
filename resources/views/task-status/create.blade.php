@@ -12,7 +12,7 @@
                             <x-input-error :messages="$errors->get('name')"/>
                         </x-div>
                         <x-div class="mt-2">
-                            <x-primary-button>{{ __('task-status.create-status') }}</x-primary-button>
+                            <x-primary-button>{{ __('task-status.create') }}</x-primary-button>
                         </x-div>
                     </x-div>
             </div>
