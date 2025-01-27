@@ -18,10 +18,7 @@ WORKDIR /app
 COPY . .
 RUN composer install
 RUN npm ci
-RUN npm run build
-RUN cp -n .env.example .env
-RUN php artisan key:gen --ansi
-RUN touch database/database.sqlite
-RUN php artisan migrate:fresh --seed
+RUN cp .env.example .env
+RUN > database/database.sqlite
 
-CMD ["bash", "-c", "php artisan serve --host=0.0.0.0 --port=$PORT"]
+CMD ["bash", "-c", "php artisan key:gen --ansi && php artisan migrate:refresh --seed --force && php artisan serve --host=0.0.0.0 --port=$PORT"]
