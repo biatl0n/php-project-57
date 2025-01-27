@@ -30,7 +30,7 @@ jobs:
 
       - name: Install
         # Install project
-        run: make install
+        run: make setup
 
       - name: Run linter
         run: make lint
