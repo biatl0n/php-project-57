@@ -16,9 +16,6 @@ RUN apt-get install -y nodejs
 WORKDIR /app
 
 COPY . .
-RUN composer install
-RUN npm ci
-RUN cp .env.example .env
-RUN > database/database.sqlite
+RUN make install
 
-CMD ["bash", "-c", "php artisan key:gen --ansi && php artisan migrate:refresh --seed --force && php artisan serve --host=0.0.0.0 --port=$PORT"]
+CMD ["bash", "-c", "php artisan serve --host=0.0.0.0 --port=$PORT"]
