@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-section>
             <div class="grid col-span-full">
-                <h1 class="mb-5 dark:text-white text-5xl">{{ __('task-status.change-status') }}</h1>
+                <h1 class="mb-5 dark:text-white text-5xl">{{ __('task_statuses.change-status') }}</h1>
                 {{ html()->modelForm($taskStatus->name, 'PATCH', route('task_statuses.update', $taskStatus->id))->class('w-50')->open() }}
                 <x-div class="flex flex-col">
                     <x-div>

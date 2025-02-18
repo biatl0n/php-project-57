@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-section>
         <div class="grid col-span-full">
-            <h1 class="mb-5 dark:text-white text-5xl">{{ __('task.change-task') }}</h1>
+            <h1 class="mb-5 dark:text-white text-5xl">{{ __('tasks.change-task') }}</h1>
             {{ html()->modelForm($task->name, 'PATCH', route('tasks.update', $task->id))->class('w-50')->open() }}
             <x-div class="mt-2">
                 <x-input-label for="name" :value="__('translations.name')" />

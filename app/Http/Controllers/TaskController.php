@@ -18,7 +18,7 @@ class TaskController extends Controller
     public function index()
     {
         $tasks = Task::paginate(15);
-        return view('task.index', compact('tasks'));
+        return view('tasks.index', compact('tasks'));
     }
 
     /**
@@ -29,7 +29,7 @@ class TaskController extends Controller
         $task = new Task();
         $taskStatuses = TaskStatus::pluck('name', 'id');
         $taskExecutors = User::pluck('name', 'id');
-        return view('task.create', compact('task', 'taskStatuses', 'taskExecutors'));
+        return view('tasks.create', compact('task', 'taskStatuses', 'taskExecutors'));
     }
 
     /**
@@ -42,12 +42,12 @@ class TaskController extends Controller
             'description' => 'nullable|string|max:1000',
             'status_id' => 'required|integer|exists:task_statuses,id',
             'assigned_to_id' => 'nullable|integer|exists:users,id'
-        ], ['name.unique' => __('task.already-exists')]);
+        ], ['name.unique' => __('tasks.already-exists')]);
         $task = new Task();
         $task->createdBy()->associate(Auth::user());
         $task->fill($data);
         $task->save();
-        flash(__('task.created-successfully'))->success();
+        flash(__('tasks.created-successfully'))->success();
         return redirect()->route('tasks.index');
     }
 
@@ -56,7 +56,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        return view('task.show', compact('task'));
+        return view('tasks.show', compact('task'));
     }
 
     /**
@@ -66,7 +66,7 @@ class TaskController extends Controller
     {
         $taskStatuses = TaskStatus::pluck('name', 'id');
         $taskExecutors = User::pluck('name', 'id');
-        return view('task.edit', compact('task', 'taskStatuses', 'taskExecutors'));
+        return view('tasks.edit', compact('task', 'taskStatuses', 'taskExecutors'));
     }
 
     /**
@@ -79,11 +79,11 @@ class TaskController extends Controller
             'description' => 'nullable|string|max:1000',
             'status_id' => 'required|integer|exists:task_statuses,id',
             'assigned_to_id' => 'nullable|integer|exists:users,id'
-        ], ['name.unique' => __('task.already-exists')]);
+        ], ['name.unique' => __('tasks.already-exists')]);
 
         $task->fill($data);
         $task->save();
-        flash(__('task.changed-successfully'))->success();
+        flash(__('tasks.changed-successfully'))->success();
         return redirect()->route('tasks.index');
     }
 
@@ -94,7 +94,7 @@ class TaskController extends Controller
     {
         Gate::authorize('delete', $task);
         $task->delete();
-        flash(__('task.deleted-successfully'))->success();
+        flash(__('tasks.deleted-successfully'))->success();
         return redirect()->route('tasks.index');
     }
 }

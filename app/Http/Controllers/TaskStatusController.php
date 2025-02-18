@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class TaskStatusController extends Controller
 {
+<<<<<<< HEAD
 //    public function __construct()
 //    {
 //        $statuses = ['new', 'finished', 'processing', 'archived'];
@@ -16,6 +17,12 @@ class TaskStatusController extends Controller
 //            }
 //        }
 //    }
+=======
+    public function __construct()
+    {
+
+    }
+>>>>>>> d85f95b (Добавлены метки (пока только index). Переименованы представления в)
 
     /**
      * Display a listing of the resource.
@@ -23,7 +30,7 @@ class TaskStatusController extends Controller
     public function index()
     {
         $taskStatuses = TaskStatus::paginate(15);
-        return view('task-status.index', compact('taskStatuses'));
+        return view('task_statuses.index', compact('taskStatuses'));
     }
 
     /**
@@ -32,7 +39,7 @@ class TaskStatusController extends Controller
     public function create()
     {
         $taskStatus = new TaskStatus();
-        return view('task-status.create', compact('taskStatus'));
+        return view('task_statuses.create', compact('taskStatus'));
     }
 
     /**
@@ -42,11 +49,11 @@ class TaskStatusController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|unique:task_statuses',
-        ], ['name.unique' => __('task-status.already-exists')]);
+        ], ['name.unique' => __('task_statuses.already-exists')]);
         $taskStatus = new TaskStatus();
         $taskStatus->fill($data);
         $taskStatus->save();
-        flash(__('task-status.created-successfully'))->success();
+        flash(__('task_statuses.created-successfully'))->success();
         return redirect()->route('task_statuses.index');
     }
 
@@ -64,7 +71,7 @@ class TaskStatusController extends Controller
     public function edit(string $id)
     {
         $taskStatus = TaskStatus::findOrFail($id);
-        return view('task-status.edit', compact('taskStatus'));
+        return view('task_statuses.edit', compact('taskStatus'));
     }
 
     /**
@@ -75,10 +82,10 @@ class TaskStatusController extends Controller
         $taskStatus = TaskStatus::findOrFail($id);
         $data = $request->validate([
             'name' => 'required|unique:task_statuses,name,' . $taskStatus->id,
-            ], ['name.unique' => __('task-status.already-exists')]);
+            ], ['name.unique' => __('task_statuses.already-exists')]);
         $taskStatus->fill($data);
         $taskStatus->save();
-        flash(__('task-status.changed-successfully'))->success();
+        flash(__('task_statuses.changed-successfully'))->success();
         return redirect()->route('task_statuses.index');
     }
 
@@ -90,9 +97,9 @@ class TaskStatusController extends Controller
         $taskStatus = TaskStatus::findOrFail($id);
         if ($taskStatus->tasks()->count() == 0) {
             $taskStatus->delete();
-            flash(__('task-status.deleted-successfully'))->success();
+            flash(__('task_statuses.deleted-successfully'))->success();
         } else {
-            flash(__('task-status.deleted-fail-is-used'))->error();
+            flash(__('task_statuses.deleted-fail-is-used'))->error();
         }
         return redirect()->route('task_statuses.index');
     }

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-section>
             <div class="grid col-span-full">
-                <h1 class="mb-5 dark:text-white text-5xl">{{ __('task-status.create-status') }}</h1>
+                <h1 class="mb-5 dark:text-white text-5xl">{{ __('task_statuses.create-status') }}</h1>
                 {{ html()->modelForm($taskStatus->name, 'POST', route('task_statuses.store'))->class('w-50')->open() }}
                     <x-div class="flex flex-col">
                         <x-div>
@@ -12,7 +12,7 @@
                             <x-input-error :messages="$errors->get('name')"/>
                         </x-div>
                         <x-div class="mt-2">
-                            <x-primary-button>{{ __('task-status.create') }}</x-primary-button>
+                            <x-primary-button>{{ __('task_statuses.create') }}</x-primary-button>
                         </x-div>
                     </x-div>
             </div>
