@@ -7,22 +7,10 @@ use Illuminate\Http\Request;
 
 class TaskStatusController extends Controller
 {
-<<<<<<< HEAD
-//    public function __construct()
-//    {
-//        $statuses = ['new', 'finished', 'processing', 'archived'];
-//        foreach ($statuses as $status) {
-//            if (!TaskStatus::whereName($status)->exists()) {
-//                TaskStatus::factory()->create(['name' => $status]);
-//            }
-//        }
-//    }
-=======
     public function __construct()
     {
 
     }
->>>>>>> d85f95b (Добавлены метки (пока только index). Переименованы представления в)
 
     /**
      * Display a listing of the resource.
