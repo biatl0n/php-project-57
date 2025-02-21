@@ -16,6 +16,6 @@ RUN apt-get install -y nodejs
 WORKDIR /app
 
 COPY . .
-RUN make install
+RUN make setup
 
 CMD ["bash", "-c", "php artisan serve --host=0.0.0.0 --port=$PORT"]
