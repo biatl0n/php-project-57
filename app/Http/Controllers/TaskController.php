@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use App\Models\TaskStatus;
 use App\Models\User;
+use App\Models\Label;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -27,9 +28,10 @@ class TaskController extends Controller
     public function create()
     {
         $task = new Task();
+        $labels = Label::pluck('name', 'id');
         $taskStatuses = TaskStatus::pluck('name', 'id');
         $taskExecutors = User::pluck('name', 'id');
-        return view('tasks.create', compact('task', 'taskStatuses', 'taskExecutors'));
+        return view('tasks.create', compact('task', 'taskStatuses', 'taskExecutors', 'labels'));
     }
 
     /**
@@ -41,12 +43,20 @@ class TaskController extends Controller
             'name' => 'required|string|max:255|unique:tasks',
             'description' => 'nullable|string|max:1000',
             'status_id' => 'required|integer|exists:task_statuses,id',
-            'assigned_to_id' => 'nullable|integer|exists:users,id'
+            'assigned_to_id' => 'nullable|integer|exists:users,id',
+            'labels' => 'nullable|array',
+            'labels.*' => 'integer|exists:labels,id',
         ], ['name.unique' => __('tasks.already-exists')]);
         $task = new Task();
         $task->createdBy()->associate(Auth::user());
         $task->fill($data);
         $task->save();
+
+        if (!empty($data['labels'])) {
+            $timestamps = ['created_at' => now(), 'updated_at' => now()];
+            $task->labels()->attach( array_fill_keys($data['labels'], $timestamps));
+        }
+
         flash(__('tasks.created-successfully'))->success();
         return redirect()->route('tasks.index');
     }
@@ -66,7 +76,8 @@ class TaskController extends Controller
     {
         $taskStatuses = TaskStatus::pluck('name', 'id');
         $taskExecutors = User::pluck('name', 'id');
-        return view('tasks.edit', compact('task', 'taskStatuses', 'taskExecutors'));
+        $labels = Label::pluck('name', 'id');
+        return view('tasks.edit', compact('task', 'taskStatuses', 'taskExecutors', 'labels'));
     }
 
     /**
@@ -78,11 +89,19 @@ class TaskController extends Controller
             'name' => 'required|string|max:255|unique:tasks,name,' . $task->id,
             'description' => 'nullable|string|max:1000',
             'status_id' => 'required|integer|exists:task_statuses,id',
-            'assigned_to_id' => 'nullable|integer|exists:users,id'
+            'assigned_to_id' => 'nullable|integer|exists:users,id',
+            'labels' => 'nullable|array',
+            'labels.*' => 'integer|exists:labels,id',
         ], ['name.unique' => __('tasks.already-exists')]);
 
         $task->fill($data);
         $task->save();
+
+        if (!empty($data['labels'])) {
+            $timestamps = ['created_at' => now(), 'updated_at' => now()];
+            $task->labels()->sync(array_fill_keys($data['labels'], $timestamps));
+        }
+
         flash(__('tasks.changed-successfully'))->success();
         return redirect()->route('tasks.index');
     }

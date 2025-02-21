@@ -12,23 +12,28 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
 Route::resource('task_statuses', TaskStatusController::class)
     ->except('index', 'show')
-    ->middleware(['AuthCheck', 'verified']);
+    ->middleware(['AuthCheck']);
 
 Route::resource('task_statuses', TaskStatusController::class)
     ->only('index', 'show');
 
 Route::resource('tasks', TaskController::class)
     ->except('index', 'show')
-    ->middleware(['AuthCheck', 'verified']);
+    ->middleware(['AuthCheck']);
 
 Route::resource('tasks', TaskController::class)
     ->only('index', 'show');
 
-Route::resource('labels', LabelController::class);
+Route::resource('labels', LabelController::class)
+    ->except('index', 'show')
+    ->middleware(['AuthCheck']);
+
+Route::resource('labels', LabelController::class)
+    ->only('index', 'show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

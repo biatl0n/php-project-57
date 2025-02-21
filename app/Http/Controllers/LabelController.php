@@ -21,7 +21,8 @@ class LabelController extends Controller
      */
     public function create()
     {
-        //
+        $label = new Label();
+        return view('labels.create', compact('label'));
     }
 
     /**
@@ -29,7 +30,15 @@ class LabelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required|unique:labels',
+            'description' => 'nullable|string|max:1000',
+        ], ['name.unique' => __('labels.already-exists')]);
+        $label = new Label();
+        $label->fill($data);
+        $label->save();
+        flash(__('labels.created-successfully'))->success();
+        return redirect()->route('labels.index');
     }
 
     /**
@@ -45,7 +54,8 @@ class LabelController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $label = Label::findOrFail($id);
+        return view('labels.edit', compact('label'));
     }
 
     /**
@@ -53,7 +63,15 @@ class LabelController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $label = Label::findOrFail($id);
+        $data = $request->validate([
+            'name' => 'required|unique:labels,' . $label->id,
+            'description' => 'nullable|string|max:1000',
+        ], ['name.unique' => __('labels.already-exists')]);
+        $label->fill($data);
+        $label->save();
+        flash(__('labels.created-successfully'))->success();
+        return redirect()->route('labels.index');
     }
 
     /**
@@ -61,6 +79,13 @@ class LabelController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $label = Label::findOrFail($id);
+        if ($label->tasks->count() == 0) {
+            $label->delete();
+            flash(__('labels.deleted-successfully'))->success();
+        } else {
+            flash(__('labels.deleted-fail-is-used'))->error();
+        }
+        return redirect()->route('labels.index');
     }
 }

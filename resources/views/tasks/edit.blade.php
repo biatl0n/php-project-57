@@ -33,6 +33,13 @@
                 <x-select id="assigned_to_id" name="assigned_to_id" :items="$taskExecutors" :value="old('assigned_to_id', $task->assigned_to_id)" />
                 <x-input-error :messages="$errors->get('assigned_to_id')" />
             </x-div>
+            <x-div class="mt-2">
+                <x-input-label for="labels" :value="__('translations.labels')" />
+            </x-div>
+            <x-div>
+                <x-select-multy id="labels[]" name="labels[]" multiple :items="$labels" :selected="$task->labels->pluck('id')->toArray()" />
+                <x-input-error :messages="$errors->get('labels')" />
+            </x-div>
 
             <x-div class="mt-4">
                 <x-primary-button>
