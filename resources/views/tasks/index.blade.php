@@ -4,9 +4,17 @@
                 <h1 class="mb-5 dark:text-white text-5xl">{{ __('translations.tasks') }}</h1>
                 @include('flash::message')
                 <x-div class="w-full flex items-center">
-                    <x-div>
-                        ---
-                    </x-div>
+                    <div>
+                        {{ html()->modelForm($tasks, 'GET', route('tasks.index'))->open() }}
+                        <div class="flex">
+                            <x-select class="w-full" name="filter[status_id]" id="filter[status_id]" :items="$taskStatuses" :value="request('filter.status_id')" :selectedOption="$name='Статус'"/>
+                            <x-select class="w-full" name="filter[created_by_id]" id="filter[created_by_id]" :items="$users" :value="request('filter.created_by_id')" :selectedOption="$name='Автор'"/>
+                            <x-primary-button class="ml-2 font-bold">
+                                {{ __('translations.prepare') }}
+                            </x-primary-button>
+                        </div>
+                        {{ html()->closeModelForm() }}
+                    </div>
                     @auth()
                     <x-div class="ml-auto">
                         <a href="{{ route('tasks.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2">{{ __('tasks.create-task') }}</a>

@@ -9,6 +9,7 @@ use App\Models\Label;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Spatie\QueryBuilder\QueryBuilder;
 
 
 class TaskController extends Controller
@@ -16,10 +17,12 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = Task::paginate(15);
-        return view('tasks.index', compact('tasks'));
+        $taskStatuses = TaskStatus::pluck('name', 'id');
+        $users = User::pluck('name', 'id');
+        $tasks = QueryBuilder::for(Task::class)->allowedFilters(['status_id', 'created_by_id'])->paginate(15)->appends($request->query());
+        return view('tasks.index', compact('tasks', 'taskStatuses', 'users'));
     }
 
     /**
