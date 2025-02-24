@@ -9,6 +9,7 @@
                         <div class="flex">
                             <x-select class="w-full" name="filter[status_id]" id="filter[status_id]" :items="$taskStatuses" :value="request('filter.status_id')" :selectedOption="$name='Статус'"/>
                             <x-select class="w-full" name="filter[created_by_id]" id="filter[created_by_id]" :items="$users" :value="request('filter.created_by_id')" :selectedOption="$name='Автор'"/>
+                            <x-select class="w-full" name="filter[assigned_to_id]" id="filter[assigned_to_id]" :items="$taskExecutors" :value="request('filter.assigned_to_id')" :selectedOption="$name='Исполнитель'"/>
                             <x-primary-button class="ml-2 font-bold">
                                 {{ __('translations.prepare') }}
                             </x-primary-button>

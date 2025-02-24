@@ -21,8 +21,9 @@ class TaskController extends Controller
     {
         $taskStatuses = TaskStatus::pluck('name', 'id');
         $users = User::pluck('name', 'id');
-        $tasks = QueryBuilder::for(Task::class)->allowedFilters(['status_id', 'created_by_id'])->paginate(15)->appends($request->query());
-        return view('tasks.index', compact('tasks', 'taskStatuses', 'users'));
+        $taskExecutors = User::pluck('name', 'id');
+        $tasks = QueryBuilder::for(Task::class)->allowedFilters(['status_id', 'created_by_id', 'assigned_to_id'])->paginate(15)->appends($request->query());
+        return view('tasks.index', compact('tasks', 'taskStatuses', 'users', 'taskExecutors'));
     }
 
     /**
