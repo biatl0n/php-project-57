@@ -25,7 +25,7 @@ class TaskStatusTest extends TestCase
 
     public function testIndex(): void
     {
-        $response = $this->get('/');
+        $response = $this->get(route('task_statuses.index'));
         $response->assertStatus(200);
     }
 

@@ -18,8 +18,9 @@ class DatabaseSeeder extends Seeder
     {
         User::factory(10)->create();
         $this->call([
+            LabelSeeder::class,
             TaskStatusSeeder::class,
-            TaskSeeder::class
+            TaskSeeder::class,
         ]);
     }
 }

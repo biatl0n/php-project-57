@@ -58,7 +58,7 @@ class TaskController extends Controller
 
         if (!empty($data['labels'])) {
             $timestamps = ['created_at' => now(), 'updated_at' => now()];
-            $task->labels()->attach( array_fill_keys($data['labels'], $timestamps));
+            $task->labels()->attach(array_fill_keys($data['labels'], $timestamps));
         }
 
         flash(__('tasks.created-successfully'))->success();
