@@ -17,8 +17,8 @@ class TaskTest extends TestCase
      */
     use RefreshDatabase;
 
-    protected ?User $user = null;
-    protected ?User $alienUser = null;
+    protected User $user;
+    protected User $alienUser;
 
     public function setUp(): void
     {
@@ -36,11 +36,10 @@ class TaskTest extends TestCase
 
     public function testCreateWithAuth()
     {
-        $taskData = Task::factory()->make()->toArray();
-        $taskData['created_by_id'] = $this->user->id;
+        $taskData = Task::factory()->make(['created_by_id' => $this->user->id])->toArray();
         $response = $this->actingAs($this->user)->post(route('tasks.store'), $taskData);
         $response->assertRedirect(route('tasks.index'));
-        $this->assertDatabaseHas('tasks', $taskData);
+        $this->assertDatabaseHas('tasks', array_merge($taskData, ['created_by_id' => $this->user->id]));
     }
 
     public function testCreateWithoutAuth()
