@@ -27,6 +27,9 @@ ide-helper:
 test-coverage:
 	XDEBUG_MODE=coverage php artisan test --coverage-clover build/logs/clover.xml
 
+phpstan:
+	composer exec --verbose phpstan -- --memory-limit=2G --ansi analyse -c phpstan.neon
+
 lint:
 	composer exec phpcs
 
