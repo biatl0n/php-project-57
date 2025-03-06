@@ -118,5 +118,4 @@ class TaskStatusTest extends TestCase
 
         $this->assertDatabaseHas('task_statuses', $taskStatus->only('name'));
     }
-
 }

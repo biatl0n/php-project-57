@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Gate;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
 
-
 class TaskController extends Controller
 {
     /**

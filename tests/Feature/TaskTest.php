@@ -82,7 +82,7 @@ class TaskTest extends TestCase
     public function testUpdateWithAuth()
     {
         $this->actingAs($this->user);
-        $task = Task::factory()->create(['name'=> 'Old name']);
+        $task = Task::factory()->create(['name' => 'Old name']);
         $data = Task::factory()->make()->only('name') + ['status_id' => $task->status_id];
         $response = $this->patch(route('tasks.update', [$task]), $data);
         $response->assertRedirect(route('tasks.index'));
@@ -91,11 +91,10 @@ class TaskTest extends TestCase
 
     public function testUpdateWithoutAuth()
     {
-        $task = Task::factory()->create(['name'=> 'Old name']);
+        $task = Task::factory()->create(['name' => 'Old name']);
         $data = Task::factory()->make()->only('name') + ['status_id' => $task->status_id];
         $response = $this->patch(route('tasks.update', [$task]), $data);
         $response->assertStatus(403);
         $this->assertDatabaseMissing('tasks', $data);
     }
-
 }

@@ -20,8 +20,7 @@ class TaskSeeder extends Seeder
         $statusIDs = TaskStatus::query()->pluck('id')->toArray();
         $labelsIDs = Label::query()->pluck('id')->toArray();
 
-        for ($i = 0; $i < 10 ; $i++)
-        {
+        for ($i = 0; $i < 10; $i++) {
             $task = Task::factory()
                 ->create([
                     'created_by_id' => fake()->randomElement($userIDs),
@@ -31,6 +30,5 @@ class TaskSeeder extends Seeder
             $task->labels()->attach(fake()->randomElement($labelsIDs));
             $task->labels()->attach(fake()->randomElement($labelsIDs));
         }
-
     }
 }
