@@ -67,20 +67,26 @@ class TaskTest extends TestCase
         $response = $this->actingAs($this->alienUser)->delete(route('tasks.destroy', [$task]));
         $response->assertSessionHasNoErrors();
         $response->status(403);
-
         $this->assertDatabaseHas('tasks', $task->only('id'));
     }
 
     public function testDestroyWithoutAuth()
     {
         $task = Task::factory()->create();
-
         $response = $this->delete(route('tasks.destroy', [$task]));
         $response->assertSessionHasNoErrors();
         $response->assertStatus(403);
-
         $this->assertDatabaseHas('tasks', $task->only('id'));
     }
 
+    public function testUpdateWithAuth()
+    {
+        $this->actingAs($this->user);
+        $task = Task::factory()->create(['name'=> 'Old name']);
+        $data = Task::factory()->make()->only('name') + ['status_id' => $task->status_id];
+        $response = $this->patch(route('tasks.update', [$task]), $data);
+        $response->assertRedirect(route('tasks.index'));
+        $this->assertDatabaseHas('tasks', $data);
+    }
 
 }
