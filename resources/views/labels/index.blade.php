@@ -26,7 +26,7 @@
                         <td>{{ $label->id }}</td>
                         <td>{{ $label->name }}</td>
                         <td>{{ $label->description }}</td>
-                        <td>{{ $label->created_at }}</td>
+                        <td>{{ $label->created_at->format('d.m.Y') }}</td>
                         @auth()
                             <td>
                                 <a class="text-red-600 hover:text-ted-900" href="{{ route('labels.destroy', $label->id) }}" data-confirm="Вы уверены?" data-method="delete" rel="nofollow">Удалить</a>
