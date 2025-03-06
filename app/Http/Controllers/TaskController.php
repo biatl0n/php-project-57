@@ -62,7 +62,7 @@ class TaskController extends Controller
         $task->fill($data);
         $task->save();
 
-        if (!empty($data['labels'])) {
+        if (isset($data['labels']) && count($data['labels']) > 0) {
             $timestamps = ['created_at' => now(), 'updated_at' => now()];
             $task->labels()->attach(array_fill_keys($data['labels'], $timestamps));
         }
@@ -107,7 +107,7 @@ class TaskController extends Controller
         $task->fill($data);
         $task->save();
 
-        if (!empty($data['labels'])) {
+        if (isset($data['labels']) && count($data['labels']) > 0) {
             $timestamps = ['created_at' => now(), 'updated_at' => now()];
             $task->labels()->sync(array_fill_keys($data['labels'], $timestamps));
         }
