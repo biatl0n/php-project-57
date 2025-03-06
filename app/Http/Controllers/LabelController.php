@@ -70,7 +70,7 @@ class LabelController extends Controller
         ], ['name.unique' => __('labels.already-exists')]);
         $label->fill($data);
         $label->save();
-        flash(__('labels.created-successfully'))->success();
+        flash(__('labels.changed-successfully'))->success();
         return redirect()->route('labels.index');
     }
 

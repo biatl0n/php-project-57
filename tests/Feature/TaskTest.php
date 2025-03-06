@@ -89,4 +89,13 @@ class TaskTest extends TestCase
         $this->assertDatabaseHas('tasks', $data);
     }
 
+    public function testUpdateWithoutAuth()
+    {
+        $task = Task::factory()->create(['name'=> 'Old name']);
+        $data = Task::factory()->make()->only('name') + ['status_id' => $task->status_id];
+        $response = $this->patch(route('tasks.update', [$task]), $data);
+        $response->assertStatus(403);
+        $this->assertDatabaseMissing('tasks', $data);
+    }
+
 }
