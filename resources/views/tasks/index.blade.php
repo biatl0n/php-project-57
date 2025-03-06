@@ -41,7 +41,7 @@
                             <td> <a class="text-blue-600 hover:text-blue-900" href="{{ route("tasks.show", $task->id) }}">{{ $task->name }}</a> </td>
                             <td> {{ $task->createdBy->name }} </td>
                             <td> {{ $task->assignedTo->name ?? '' }} </td>
-                            <td> {{ $task->created_at }} </td>
+                            <td> {{ $task->created_at->format('d.m.Y') }} </td>
                             @auth()
                                 <td>
                                     @can('delete', $task)
