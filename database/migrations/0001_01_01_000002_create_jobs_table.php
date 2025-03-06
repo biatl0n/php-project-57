@@ -11,6 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
+        $this->createJobsTable();
+        $this->createJobBatchesTable();
+        $this->createFailedJobsTable();
+    }
+
+    /**
+     * Create the jobs table.
+     */
+    protected function createJobsTable(): void
+    {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->string('queue')->index();
@@ -20,7 +30,13 @@ return new class extends Migration
             $table->unsignedInteger('available_at');
             $table->unsignedInteger('created_at');
         });
+    }
 
+    /**
+     * Create the job_batches table.
+     */
+    protected function createJobBatchesTable(): void
+    {
         Schema::create('job_batches', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->string('name');
@@ -33,7 +49,13 @@ return new class extends Migration
             $table->integer('created_at');
             $table->integer('finished_at')->nullable();
         });
+    }
 
+    /**
+     * Create the failed_jobs table.
+     */
+    protected function createFailedJobsTable(): void
+    {
         Schema::create('failed_jobs', function (Blueprint $table) {
             $table->id();
             $table->string('uuid')->unique();
