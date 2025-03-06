@@ -1,10 +1,6 @@
 <?php
 
 return [
-    'accepted' => 'Поле :attribute должно быть принято.',
-    'accepted_if' => 'The :attribute field must be accepted when :other is :value.',
-    'active_url' => 'The :attribute field must be a valid URL.',
-    'after' => 'The :attribute field must be a date after :date.',
     'after_or_equal' => 'The :attribute field must be a date after or equal to :date.',
     'alpha' => 'The :attribute field must only contain letters.',
     'alpha_dash' => 'The :attribute field must only contain letters, numbers, dashes, and underscores.',
@@ -19,6 +15,10 @@ return [
         'numeric' => 'The :attribute field must be between :min and :max.',
         'string' => 'The :attribute field must be between :min and :max characters.',
     ],
+    'accepted' => 'Поле :attribute должно быть принято.',
+    'accepted_if' => 'Поле :attribute должно быть принято когда :other это :value.',
+    'active_url' => 'Поле :attribute должно быть валидным URL.',
+    'after' => 'Поле :attribute должно быть датой после :date.',
     'boolean' => 'The :attribute field must be true or false.',
     'can' => 'The :attribute field contains an unauthorized value.',
     'confirmed' => 'Пароль и подтверждение не совпадают',
