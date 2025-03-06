@@ -65,7 +65,7 @@ class LabelController extends Controller
     {
         $label = Label::findOrFail($id);
         $data = $request->validate([
-            'name' => 'required|unique:labels,' . $label->id,
+            'name' => 'required|unique:labels,name,' . $label->id,
             'description' => 'nullable|string|max:1000',
         ], ['name.unique' => __('labels.already-exists')]);
         $label->fill($data);
