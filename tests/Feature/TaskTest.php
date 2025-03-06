@@ -65,7 +65,7 @@ class TaskTest extends TestCase
 
         $response = $this->actingAs($this->alienUser)->delete(route('tasks.destroy', [$task]));
         $response->assertSessionHasNoErrors();
-        $response->status(403);
+        $response->assertStatus(403);
         $this->assertDatabaseHas('tasks', $task->only('id'));
     }
 
