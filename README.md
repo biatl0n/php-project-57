@@ -5,7 +5,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/ec88aa96cbe704708b0d/maintainability)](https://codeclimate.com/github/biatl0n/php-project-57/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/ec88aa96cbe704708b0d/test_coverage)](https://codeclimate.com/github/biatl0n/php-project-57/test_coverage)
 
-Демонстрация доступа на Render.com: https://php-project-57-ielt.onrender.com/
+Демонстрация: https://taskmgr.codecopypaste.ru/
 
 ## О проекте
 
